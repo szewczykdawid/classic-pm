@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic PM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        #chat-box {
+            width: 60%;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .message {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .user {
+            background: #007bff;
+            color: white;
+            text-align: right;
+        }
+        .pm {
+            background: #ddd;
+            text-align: left;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Classic PM Chat</h1>
+    <div id="chat-box">
+        <div id="messages"></div>
+        <input type="text" id="user-input" placeholder="Ask something...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    
+    <script>
+        const pmResponses = [
+            "What is the status?",
+            "What are the blockers?",
+            "Can we deliver this sooner?",
+            "What is the impact of not delivering on time?",
+            "Let’s take this offline.",
+            "Let’s circle back on this later.",
+            "Have you added this to the roadmap?",
+            "Can you put this in a deck?",
+            "Can you provide a high-level overview?",
+            "We need to align with stakeholders first."
+        ];
+
+        function sendMessage() {
+            let userInput = document.getElementById("user-input").value;
+            if (!userInput) return;
+            
+            addMessage(userInput, "user");
+            setTimeout(() => {
+                let response = pmResponses[Math.floor(Math.random() * pmResponses.length)];
+                addMessage(response, "pm");
+            }, 500);
+            
+            document.getElementById("user-input").value = "";
+        }
+
+        function addMessage(text, sender) {
+            let messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender);
+            messageDiv.innerText = text;
+            document.getElementById("messages").appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>
