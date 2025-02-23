@@ -55,6 +55,8 @@
             margin-top: 10px;
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7100218974303477"
+    crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>Classic PM Chat</h1>
@@ -197,11 +199,6 @@
                 You are now an <strong>Official Office Diplomat™</strong>.<br>
                 Feel free to add this to your yearly performance review. 😉
                 <br><br>
-                <img id="badge-img" src="" alt="Office Diplomat Badge" style="max-width: 300px; display: block; margin: 10px auto;">
-                <br>
-                <button id="linkedin-share" style="background: #0073b1; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;">
-                    Share on LinkedIn 🚀
-                </button>
             `;
             achievement.style.padding = "15px";
             achievement.style.marginTop = "10px";
@@ -209,11 +206,12 @@
             achievement.style.borderRadius = "5px";
             achievement.style.fontWeight = "bold";
             achievement.style.textAlign = "center";
+            achievement.style.lineHeight = "1.6";
 
             chatBox.appendChild(achievement);
             
             launchConfetti(); // Confetti effect 🎉
-            generateBadge(); // Generate Badge Image
+            // generateBadge(); // Generate Badge Image
 
             // Add LinkedIn Sharing Functionality
             document.getElementById("linkedin-share").addEventListener("click", shareOnLinkedIn);
