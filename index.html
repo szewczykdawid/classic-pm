@@ -16,7 +16,7 @@
             background-color: #f4f4f4;
             padding: 20px;
         }
-        #chat-box {
+        #chat-box, #quiz-box {
             width: 90%;
             max-width: 600px;
             background: white;
@@ -25,6 +25,24 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
+        }
+        #quiz-box { display: none; }
+        .question { font-size: 18px; margin-bottom: 15px; }
+        .option { padding: 10px; margin: 5px; cursor: pointer; background: #007bff; color: white; border-radius: 5px; }
+        .option:hover { background: #0056b3; }
+        .hidden { display: none; }
+        #button-chat {
+            display: none;
+        }
+        #button-quiz, #button-chat {
+            padding: 20px;
+            font-size: 19px;
+            border-radius: 10px;
+            border: white;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            margin: 20px 0;
         }
         #messages {
             height: 300px;
@@ -105,13 +123,19 @@
 </head>
 <body>
     <h1>This PM is 100% aligned with stakeholders and 0% useful</h1>
-    <h1>Classic PM Chat</h1>
+    <button id="button-quiz" onclick="startQuiz()">Earn your PM Badge</button>
+    <button id="button-chat" onclick="startChat()">Take me back to Classic PM Chat</button>
+    <h1 id ="chat-h1">Classic PM Chat</h1>
     <div id="chat-box">
         <div id="messages"></div>
         <div class="input-container">
             <input type="text" id="user-input" placeholder="Ask something...">
             <button onclick="sendMessage()">Send</button>
         </div>
+    </div>
+    <div id="quiz-box">
+        <div id="question" class="question"></div>
+        <div id="options"></div>
     </div>
     <footer>
         ❤️ Brought to you with love, hoping you found your next PM ❤️  
@@ -204,7 +228,18 @@
             "Who is the primary point of contact for this?"
         ];
 
-        let messageCount = 0;
+        const questions = [
+            `Are you 'Deadline Obsessed'? Are you always asking, "Is this on track?" and pushing for unrealistic deadlines, even when devs warn you it’s impossible?`, 
+            `Are you a "Status Call Addict"? You truly believe that more meetings = more productivity. Ah...and..you schedule daily stand-ups that last an hour?`,
+            `Are you "Tech-Illiterate"? You easily get confused when devs talk about APIs, databases, or deployment pipelines?`,
+            `Are you a "Buzzword Machine"? Do you throw around terms like "synergy", "agile", "scrum" or "stakeholder buy-in"?)`, 
+            `Are you a "Scope Creep Enabler"? You just can’t say NO to new feature requests and you keep adding things without adjusting deadlines?`,
+            `Do you live and breathe "All-Talk, No-Action"? Do you spend more time making roadmaps than ensuring execution?`,
+            `Micromanager is your second name? You seek updates on every single commit?`,
+            `"Are you a PowerPoint Engineer? Can you make beautiful slides with no clue how the tech actual works?"`,
+        ];
+
+        let messageCount = 0; score = 0, currentQuestion = 0;
 
         const init = function() {
             let response = pmResponses[Math.floor(Math.random() * pmResponses.length)];
@@ -315,6 +350,58 @@
                 }
             })();
         }
+
+        function startQuiz() {
+            document.getElementById('chat-box').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+            document.getElementById('button-quiz').style.display = 'none';
+            document.getElementById('chat-h1').style.display = 'none';
+            showQuestion();
+        }
+
+        function startChat() {
+            document.getElementById('chat-box').style.display = 'block';
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('button-quiz').style.display = 'block';
+            document.getElementById('button-chat').style.display = 'none';
+            document.getElementById('chat-h1').style.display = 'block';
+            score = 0, currentQuestion = 0;
+            document.getElementById('quiz-box').innerHTML = `
+                <div id="question" class="question"></div>
+                <div id="options"></div>`;
+        }
+
+        function showQuestion() {
+            if (currentQuestion >= questions.length) return showResults();
+            document.getElementById('question').textContent = `Question ${currentQuestion + 1}/8: ${questions[currentQuestion]}`;
+            document.getElementById('options').innerHTML = `
+                <div class='option' onclick='answer(1)'>Yes</div>
+                <div class='option' onclick='answer(0)'>No</div>
+            `;
+        }
+        
+        function answer(choice) {
+            score += choice;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showResults() {
+            let result;
+            if (score === 0) result = "You are probably a Developer/DevOps. You would fail miserably as a PM (and that's probably a good thing).";
+            else if (score === 1) result = "You have a Tester mindset. Stay away from PM work!";
+            else if (score === 2) result = "You’re a Tech Enthusiast. Not a PM yet.";
+            else if (score === 3) result = "You’re an Accidental PM. Thinks like an engineer.";
+            else if (score === 4) result = "You’re a Balanced Hybrid. Can manage projects but still have a soul.";
+            else if (score === 5) result = "You’re an Aspiring PM. Beware of PowerPoint addiction.";
+            else if (score === 6) result = "You’re a Natural PM. Efficient but slightly annoying to devs.";
+            else if (score === 7) result = "You’re a PM Jedi. Devs fear and respect you.";
+            else result = "You are a True PM Overlord. Your calendar is your kingdom, your Gantt chart is your sword!";
+            
+            document.getElementById('quiz-box').innerHTML = `<h2>${result}</h2>`;
+            document.getElementById('button-chat').style.display = 'block';
+        }
+
 
         init();
 
