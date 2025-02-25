@@ -1,0 +1,103 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+#chat-box, #quiz-box {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+#quiz-box { display: none; }
+.question { font-size: 18px; margin-bottom: 15px; }
+.option { padding: 10px; margin: 5px; cursor: pointer; background: #007bff; color: white; border-radius: 5px; }
+.option:hover { background: #0056b3; }
+.hidden { display: none; }
+#button-chat {
+    display: none;
+}
+#button-quiz, #button-chat {
+    padding: 20px;
+    font-size: 19px;
+    border-radius: 10px;
+    border: white;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    margin: 20px 0;
+}
+#messages {
+    height: 300px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.message {
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+.user {
+    background: #007bff;
+    color: white;
+    text-align: right;
+}
+.pm {
+    background: #ddd;
+    text-align: left;
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.content {
+    flex: 1; /* Pushes the footer down */
+}
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+footer {
+    background: #f4f4f4;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    border-top: 2px solid #ddd;
+    width: 100%;
+    margin-top: auto; 
+}
+
+@media (min-width: 600px) {
+    .input-container {
+        flex-direction: row;
+    }
+    input {
+        flex: 1;
+    }
+}
