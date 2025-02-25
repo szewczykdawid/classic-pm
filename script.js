@@ -213,6 +213,7 @@ function startQuiz() {
     document.getElementById('quiz-box').style.display = 'block';
     document.getElementById('button-quiz').style.display = 'none';
     document.getElementById('chat-h1').style.display = 'none';
+    document.getElementById('pm-h1').style.display = 'none';
     showQuestion();
 }
 
@@ -222,6 +223,7 @@ function startChat() {
     document.getElementById('button-quiz').style.display = 'block';
     document.getElementById('button-chat').style.display = 'none';
     document.getElementById('chat-h1').style.display = 'block';
+    document.getElementById('pm-h1').style.display = 'block';
     score = 0, currentQuestion = 0;
     document.getElementById('quiz-box').innerHTML = `
         <div id="question" class="question"></div>
@@ -255,7 +257,7 @@ function showResults() {
     else if (score === 7) result = "You’re a PM Jedi. Devs fear and respect you.";
     else result = "You are a True PM Overlord. Your calendar is your kingdom, your Gantt chart is your sword!";
     
-    document.getElementById('quiz-box').innerHTML = `<h2>${result}</h2>`;
+    document.getElementById('quiz-box').innerHTML = `<h2 id="prize">${result}</h2>`;
     document.getElementById('button-chat').style.display = 'block';
 }
 
