@@ -164,34 +164,6 @@ function triggerAchievement() {
     document.getElementById("linkedin-share").addEventListener("click", shareOnLinkedIn);
 }
 
-function generateBadge() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 300;
-    canvas.height = 150;
-    const ctx = canvas.getContext("2d");
-
-    // Background
-    ctx.fillStyle = "#0073b1"; // LinkedIn Blue
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Badge Text
-    ctx.fillStyle = "white";
-    ctx.font = "bold 16px Arial";
-    ctx.fillText("🏅 Office Diplomat", 75, 50);
-    ctx.font = "14px Arial";
-    ctx.fillText("Survived 3+ PM interactions", 55, 80);
-    ctx.font = "12px Arial";
-    ctx.fillText("Visit: typical-pm.com", 85, 110); // Your website
-
-    // Set as Image
-    document.getElementById("badge-img").src = canvas.toDataURL();
-}
-
-function shareOnLinkedIn() {
-    const linkedInURL = `https://www.linkedin.com/shareArticle?mini=true&url=https://typical-pm.com&title=I%20just%20became%20an%20Office%20Diplomat!%20🏅&summary=I%20survived%203+%20PM%20interactions%20and%20earned%20this%20badge%20at%20Typical-PM.com!`;
-    window.open(linkedInURL, "_blank");
-}
-
 function launchConfetti() {
     const duration = 2 * 1000; // 3 seconds
     const end = Date.now() + duration;
