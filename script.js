@@ -86,11 +86,11 @@ const pmResponses = [
 ];
 
 const questions = [
-    `Are you 'Deadline Obsessed'? Are you always asking, "Is this on track?" and pushing for unrealistic deadlines, even when devs warn you it’s impossible?`, 
+    `Are you 'Deadline Obsessed'? Are you always asking, "Is this on track?" and pushing for unrealistic deadlines?`, 
     `Are you a "Status Call Addict"? You truly believe that more meetings = more productivity. Ah...and..you schedule daily stand-ups that last an hour?`,
     `Are you "Tech-Illiterate"? You easily get confused when devs talk about APIs, databases, or deployment pipelines?`,
     `Are you a "Buzzword Machine"? Do you throw around terms like "synergy", "agile", "scrum" or "stakeholder buy-in"?)`, 
-    `Are you a "Scope Creep Enabler"? You just can’t say NO to new feature requests and you keep adding things without adjusting deadlines?`,
+    `You just can’t say NO to new feature requests and you keep adding things without adjusting deadlines?`,
     `Do you live and breathe "All-Talk, No-Action"? Do you spend more time making roadmaps than ensuring execution?`,
     `Micromanager is your second name? You seek updates on every single commit?`,
     `"Are you a PowerPoint Engineer? Can you make beautiful slides with no clue how the tech actual works?"`,
@@ -246,18 +246,32 @@ function answer(choice) {
 }
 
 function showResults() {
-    let result;
-    if (score === 0) result = "You are probably a Developer/DevOps. You would fail miserably as a PM (and that's probably a good thing).";
-    else if (score === 1) result = "You have a Tester mindset. Stay away from PM work!";
-    else if (score === 2) result = "You’re a Tech Enthusiast. Not a PM yet.";
-    else if (score === 3) result = "You’re an Accidental PM. Thinks like an engineer.";
-    else if (score === 4) result = "You’re a Balanced Hybrid. Can manage projects but still have a soul.";
-    else if (score === 5) result = "You’re an Aspiring PM. Beware of PowerPoint addiction.";
-    else if (score === 6) result = "You’re a Natural PM. Efficient but slightly annoying to devs.";
-    else if (score === 7) result = "You’re a PM Jedi. Devs fear and respect you.";
-    else result = "You are a True PM Overlord. Your calendar is your kingdom, your Gantt chart is your sword!";
-    
-    document.getElementById('quiz-box').innerHTML = `<h2 id="prize">${result}</h2>`;
+    const totalQuestions = 8; 
+    const percentage = Math.round((score / totalQuestions) * 100);
+    let resultText;
+
+    if (score === 0) resultText = "You are probably a Developer/DevOps. You would fail miserably as a PM (and that's probably a good thing).";
+    else if (score === 1) resultText = "You have a Tester mindset. Stay away from PM work!";
+    else if (score === 2) resultText = "You’re a Tech Enthusiast. Not a PM yet.";
+    else if (score === 3) resultText = "You’re an Accidental PM. Thinks like an engineer.";
+    else if (score === 4) resultText = "You’re a Balanced Hybrid. Can manage projects but still have a soul.";
+    else if (score === 5) resultText = "You’re an Aspiring PM. Beware of PowerPoint addiction.";
+    else if (score === 6) resultText = "You’re a Natural PM. Efficient but slightly annoying to devs.";
+    else if (score === 7) resultText = "You’re a PM Jedi. Devs fear and respect you.";
+    else resultText = "You are a True PM Overlord. Your calendar is your kingdom, your Gantt chart is your sword!";
+
+    // Update the UI
+    document.getElementById('quiz-box').innerHTML = `
+        <div class="result-container">
+            <h3 class="result-title">Your Result:</h3>
+            <div class="progress-bar">
+                <div class="progress" style="width: ${percentage}%;"></div>
+                <span class="progress-text">${percentage}%</span>
+            </div>
+            <p class="result-text">${resultText}</p>
+        </div>
+    `;
+
     document.getElementById('button-chat').style.display = 'block';
 }
 
