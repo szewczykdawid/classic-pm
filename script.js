@@ -140,20 +140,13 @@ function addMessage(text, sender) {
 function triggerAchievement() {
     const chatBox = document.getElementById("chat-box");
     const achievement = document.createElement("div");
+
     achievement.innerHTML = `
-        🎉 <strong>Congratulations!</strong> 🎉<br>
-        You survived 3 rounds with a PM! 🏅<br>
-        You are now an <strong>Official Office Diplomat™</strong>.<br>
-        Feel free to add this to your yearly performance review. 😉
-        <br><br>
-    `;
-    achievement.style.padding = "15px";
-    achievement.style.marginTop = "10px";
-    achievement.style.backgroundColor = "#f4f4f4"; // Yellow for attention
-    achievement.style.borderRadius = "5px";
-    achievement.style.fontWeight = "bold";
-    achievement.style.textAlign = "center";
-    achievement.style.lineHeight = "1.6";
+    <div class="result-container">
+        <h3 class="result-title">Congratulations!</h3>
+        <p class="result-text"> You survived 3 rounds with a PM! 🏅 </p>
+        <p class="result-text"> Feel free to add this to your yearly performance review 😉 and share with the world!</p>
+    </div>`;
 
     chatBox.appendChild(achievement);
     
