@@ -232,10 +232,15 @@ function startChat() {
 
 function showQuestion() {
     if (currentQuestion >= questions.length) return showResults();
-    document.getElementById('question').textContent = `Question ${currentQuestion + 1}/8: ${questions[currentQuestion]}`;
+    
+    document.getElementById('question').innerHTML = `
+        <span class="question-number">Question ${currentQuestion + 1}/8</span>
+        <span class="question-text">${questions[currentQuestion]}</span>
+    `;
+
     document.getElementById('options').innerHTML = `
-        <div class='option' onclick='answer(1)'>Yes</div>
-        <div class='option' onclick='answer(0)'>No</div>
+        <div class='option' onclick='answer(1)'>✅ Yes</div>
+        <div class='option' onclick='answer(0)'>❌ No</div>
     `;
 }
 
